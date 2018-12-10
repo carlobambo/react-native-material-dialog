@@ -20,14 +20,15 @@ const { height } = Dimensions.get('window');
 // TODO: Support custom actions
 // TODO: Stacked full-width buttons
 
-const ActionButton = ({ testID, onPress, colorAccent, label }) => (
+const ActionButton = ({ testID, onPress, colorAccent, label, disabled }) => (
   <TouchableHighlight
     testID={testID}
     style={styles.actionContainer}
     underlayColor={colors.androidPressedUnderlay}
     onPress={onPress}
+    disabled={disabled}
   >
-    <Text style={[material.button, { color: colorAccent }]}>{label}</Text>
+    <Text style={[material.button, { color: disabled ? 'rgba(0, 0, 0, 0.26)' : colorAccent }]}>{label}</Text>
   </TouchableHighlight>
 );
 
@@ -38,6 +39,7 @@ const MaterialDialog = ({
   titleColor,
   colorAccent,
   backgroundColor,
+  actionButtonDisabled,
   addPadding,
   onOk,
   onCancel,
@@ -82,22 +84,27 @@ const MaterialDialog = ({
                 >
                   {children}
                 </View>
-                {onOk != null && onCancel != null ? (
+                {onOk || onCancel ? (
                   <View
                     style={scrolled ? styles.actionsContainerScrolled : styles.actionsContainer}
                   >
+                  {onCancel &&
                     <ActionButton
                       testID="dialog-cancel-button"
                       colorAccent={colorAccent}
                       onPress={onCancel}
                       label={cancelLabel}
-                    />
+                      disabeld={actionButtonDisabled}
+                    />}
+                  {onOk &&
                     <ActionButton
                       testID="dialog-ok-button"
                       colorAccent={colorAccent}
                       onPress={onOk}
                       label={okLabel}
+                      disabeld={actionButtonDisabled}
                     />
+                  }
                   </View>
                 ) : null}
               </View>
