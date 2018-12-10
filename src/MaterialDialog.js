@@ -94,7 +94,7 @@ const MaterialDialog = ({
                       colorAccent={colorAccent}
                       onPress={onCancel}
                       label={cancelLabel}
-                      disabeld={actionButtonDisabled}
+                      disabled={actionButtonDisabled}
                     />}
                   {onOk &&
                     <ActionButton
@@ -102,7 +102,7 @@ const MaterialDialog = ({
                       colorAccent={colorAccent}
                       onPress={onOk}
                       label={okLabel}
-                      disabeld={actionButtonDisabled}
+                      disabled={actionButtonDisabled}
                     />
                   }
                   </View>
@@ -225,6 +225,7 @@ ActionButton.propTypes = {
   colorAccent: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };
 
 export default MaterialDialog;
